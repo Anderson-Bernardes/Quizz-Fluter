@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,13 +56,21 @@ class _TelaCadastroState extends State<TelaCadastro> {
                   child: FlatButton(
                     shape: CircleBorder(),
                     onPressed: () {
-                      if (!tocando)
+                      if (!tocando){
+                       // _startStopButtonPressed();
+
                         play();
-                      else
+
+                      }
+
+                      else{
                         stop();
+                      }
+
                     },
                     child: tocando
-                        ? Icon(
+                        ? //_buildBody()
+                    Icon(
                             Icons.pause,
                             size: 300,
                           )
@@ -82,7 +91,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                         return Container(
                           alignment: Alignment.center,
                           child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
                             strokeWidth: 10.0,
                           ),
                         );
@@ -96,7 +105,15 @@ class _TelaCadastroState extends State<TelaCadastro> {
                           //return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
                           return _createListView(context, snapshot);
                           else
-                            return Container(color: Colors.red,width: 100, height: 100,);
+                            return Container(
+                              child: Text(
+                                "Ao apertar em iniciar terá 45 segundos para responder!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 25
+                                ),
+                              ),
+                            );
                         }
                     }
                   }),
@@ -152,8 +169,9 @@ class _TelaCadastroState extends State<TelaCadastro> {
     print(dados["tracks"][indexMusica]["previewURL"]);
 
     respostaCerta = random.nextInt(3);
-    //alternativas();
     player.play(dados["tracks"][indexMusica]["previewURL"]).then((index) {
+
+
       setState(() {
         tocando = true;
 
@@ -174,6 +192,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
             children: <Widget>[
               Text(
                 snapshot.data["tracks"][index]["name"],
+                textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20),
               ),
               Text(
@@ -183,6 +202,62 @@ class _TelaCadastroState extends State<TelaCadastro> {
             ],
           )),
     );
+  }
+
+  bool _isStart = true;
+  String _stopwatchText = '00:00:00';
+  final _stopWatch = new Stopwatch();
+  final _timeout = const Duration(seconds: 1);
+
+  void _startTimeout() {
+    new Timer(_timeout, _handleTimeout);
+  }
+
+  void _handleTimeout() {
+    if (_stopWatch.isRunning) {
+      _startTimeout();
+    }
+    setState(() {
+      _setStopwatchText();
+    });
+  }
+
+  void _startStopButtonPressed() {
+    setState(() {
+      if (_stopWatch.isRunning) {
+        _isStart = true;
+        _stopWatch.stop();
+      } else {
+        _isStart = false;
+        _stopWatch.start();
+        _startTimeout();
+      }
+    });
+  }
+
+  void _resetButtonPressed(){
+    if(_stopWatch.isRunning){
+      _startStopButtonPressed();
+    }
+    setState(() {
+      _stopWatch.reset();
+      _setStopwatchText();
+    });
+  }
+
+  void _setStopwatchText(){
+    _stopwatchText = _stopWatch.elapsed.inHours.toString().padLeft(2,'0') + ':'+
+        (_stopWatch.elapsed.inMinutes%60).toString().padLeft(2,'0') + ':' +
+        (_stopWatch.elapsed.inSeconds%60).toString().padLeft(2,'0');
+  }
+
+
+  Widget _buildBody() {
+    return
+        Text(
+              _stopwatchText,
+              style: TextStyle(fontSize: 72),
+            );
   }
 }
 
