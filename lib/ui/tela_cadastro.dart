@@ -25,6 +25,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
   int indexMusica;
   var random = new Random();
   int respostaCerta, contador =0;
+  int r = 0, g=0;
   /*@override
   void initState() {
     // inicializando o objeto da classe Future no initState
@@ -164,10 +165,11 @@ class _TelaCadastroState extends State<TelaCadastro> {
     return //Container(color: Colors.red, height: 100, width: 100,);
     GestureDetector(
       onTap: () {
-        print("tap no index ${index}");
+
+
       },
       child: Container(
-          //padding: EdgeInsets.only(top: 15),
+          padding: EdgeInsets.only(top: 15),
           child: Column(
             children: <Widget>[
               Text(
@@ -176,6 +178,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
               ),
               Text(
                 snapshot.data["tracks"][index]["artistName"],
+                textAlign: TextAlign.center,
               ),
             ],
           )),
