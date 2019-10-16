@@ -56,13 +56,13 @@ _TelaJogoState(this._nome);
                       if (!tocando) {
                         play();
                       } else {
-                        stop();
+                        //stop();
                         //_startStopButtonPressed();
                       }
                     },
                     child: tocando
                         ? Icon(
-                      Icons.pause,
+                      Icons.queue_music,
                       size: 230,
                     )
                         : Icon(
