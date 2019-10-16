@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizzflutter/ui/tela_inicial.dart';
 import 'package:http/http.dart' as http;
+import 'package:quizzflutter/ui/tela_ranking.dart';
 
 class TelaGameOver extends StatefulWidget {
   String jogador;
@@ -45,7 +46,7 @@ class _TelaGameOverState extends State<TelaGameOver> {
               onPressed: (){
                 print("indo pra o ranking");
                 _getSearch();
-
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (contexto) => TelaRanking()));
               },
               child: Text(
                 "Ranking",
