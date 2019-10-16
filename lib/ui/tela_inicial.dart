@@ -9,9 +9,9 @@ class TelaInicial extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 150),
           child: Container(
+            color: Colors.blueGrey[200],
+     padding: EdgeInsets.only(top: 150),
      child: Column(
            children: <Widget>[
 
@@ -53,7 +53,7 @@ class TelaInicial extends StatelessWidget {
            ],
      ),
     ),
-        ),
+
       )
     );
   }

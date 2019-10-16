@@ -37,78 +37,81 @@ _TelaJogoState(this._nome);
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 50),
-        child: Column(
-          children: <Widget>[
-            Center(
-                child: !tocando ? Text(
-                  "Aperte o Play para começar",
-                  style: TextStyle(fontSize: 40),
-                  textAlign: TextAlign.center,
-                ): Container()),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: FlatButton(
-                    shape: CircleBorder(),
-                    onPressed: () {
-                      if (!tocando) {
-                        play();
-                      } else {
-                        //stop();
-                        //_startStopButtonPressed();
-                      }
-                    },
-                    child: tocando
-                        ? Icon(
-                      Icons.queue_music,
-                      size: 230,
-                    )
-                        : Icon(
-                      Icons.play_arrow,
-                      size: 230,
+      body:
+         Container(
+           padding: EdgeInsets.all(20),
+           color: Colors.blueGrey[200],
+           child: Column(
+            children: <Widget>[
+              Center(
+                  child: !tocando ? Text(
+                    "Aperte o Play para começar",
+                    style: TextStyle(fontSize: 40),
+                    textAlign: TextAlign.center,
+                  ): Container()),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: FlatButton(
+                      shape: CircleBorder(),
+                      onPressed: () {
+                        if (!tocando) {
+                          play();
+                        } else {
+                          //stop();
+                          //_startStopButtonPressed();
+                        }
+                      },
+                      child: tocando
+                          ? Icon(
+                        Icons.queue_music,
+                        size: 210,
+                      )
+                          : Icon(
+                        Icons.play_arrow,
+                        size: 230,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            FutureBuilder(
-                future: _getSearch(),
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                    case ConnectionState.waiting:
-                      return Container(
-                        alignment: Alignment.center,
-                        child: CircularProgressIndicator(
-                          valueColor:
-                          AlwaysStoppedAnimation<Color>(Colors.black),
-                          strokeWidth: 10.0,
-                        ),
-                      );
-                    default:
-                      if (snapshot.hasError) {
+                ],
+              ),
+              FutureBuilder(
+                  future: _getSearch(),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
                         return Container(
-                          color: Colors.redAccent,
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator(
+                            valueColor:
+                            AlwaysStoppedAnimation<Color>(Colors.black),
+                            strokeWidth: 10.0,
+                          ),
                         );
-                      } else {
-                        if (tocando)
-                          return _createListView(context, snapshot);
-                        else
+                      default:
+                        if (snapshot.hasError) {
                           return Container(
-                            child: Text(
-                              "Ao apertar tocará 30 segundos da música!",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 25),
-                            ),
+                            color: Colors.redAccent,
                           );
-                      }
-                  }
-                }),
-          ],
+                        } else {
+                          if (tocando)
+                            return _createListView(context, snapshot);
+                          else
+                            return Container(
+                              child: Text(
+                                "Ao apertar tocará 30 segundos da música!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 25),
+                              ),
+                            );
+                        }
+                    }
+                  }),
+            ],
         ),
-      ),
+         ),
+
     );
   }
 
@@ -176,6 +179,7 @@ _TelaJogoState(this._nome);
             plyr.play('Faustão Acertou meme (1).mp3');
             print("ACERTOU MISERAVI");
             stop();
+            play();
           }
           else
           {

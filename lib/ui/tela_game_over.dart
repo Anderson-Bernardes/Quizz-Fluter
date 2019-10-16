@@ -22,6 +22,7 @@ class _TelaGameOverState extends State<TelaGameOver> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(child: Container(
+        color: Colors.blueGrey[200],
         padding: EdgeInsets.only(top: 150),
         child: Column(
           children: <Widget>[
@@ -29,7 +30,7 @@ class _TelaGameOverState extends State<TelaGameOver> {
             style: TextStyle(
               fontSize: 60,
               fontWeight: FontWeight.bold,
-              color: Colors.redAccent
+              color: Colors.red
             ),
             ),
             SizedBox(
@@ -40,9 +41,13 @@ class _TelaGameOverState extends State<TelaGameOver> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 40,
+                fontWeight: FontWeight.bold
               ),
             ),
+            SizedBox(height: 30,),
             RaisedButton(
+              padding: EdgeInsets.all(20),
+              color: Colors.black,
               onPressed: (){
                 print("indo pra o ranking");
                 _getSearch();
@@ -50,16 +55,19 @@ class _TelaGameOverState extends State<TelaGameOver> {
               },
               child: Text(
                 "Ranking",
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: 30, color: Colors.white),
               ),
             ),
+            SizedBox(height: 30,),
             RaisedButton(
+              padding: EdgeInsets.all(20),
+              color: Colors.black,
               onPressed: (){
                 _getSearch();
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (contexto) => TelaInicial()));
               },
               child: Text("Menu Principal",
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: 30, color: Colors.white),
               ),
             ),
 
