@@ -46,7 +46,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - imagens/perfil.svg
-  #  - images/a_dot_ham.jpeg
+    - imagens/logo_pucminas.png
+    - assets/Faustão - Errou!.mp3
+    - assets/Faustão - Acertou.mp3
+    - assets/Faustão - Errou! (2).mp3
+    - assets/Faustão Acertou meme (1).mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
