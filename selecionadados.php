@@ -14,7 +14,7 @@
     //Criando Conexão Com o Banco de Dados
     $mysqli = new mysqli('den1.mysql5.gear.host','qualeamusica', 'Et326!og72J?', 'qualeamusica'); 
 
-    $sql = "SELECT * FROM usuarios ORDER BY nome DESC";
+    $sql = "SELECT * FROM usuarios ORDER BY pontos DESC";
 
     $resposta = $mysqli->query($sql);
 
